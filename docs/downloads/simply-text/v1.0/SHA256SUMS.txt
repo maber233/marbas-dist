@@ -1,0 +1,1 @@
+0a61a1fdea31492b2070fa303506f189d623660087778fff4a69ee5755cafc71  dist/Simply Text.app.zip
