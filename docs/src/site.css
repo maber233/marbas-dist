@@ -1,0 +1,367 @@
+:root {
+    --bg: #f4efe6;
+    --bg-elevated: rgba(255, 252, 246, 0.9);
+    --surface: rgba(255, 255, 255, 0.76);
+    --surface-strong: #fffdf8;
+    --text: #1e1a17;
+    --muted: #6a625c;
+    --accent: #b85c38;
+    --accent-strong: #934225;
+    --border: rgba(70, 50, 35, 0.12);
+    --shadow: rgba(40, 25, 15, 0.1);
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg: #181513;
+        --bg-elevated: rgba(28, 24, 22, 0.9);
+        --surface: rgba(36, 31, 28, 0.82);
+        --surface-strong: #26211d;
+        --text: #f4eee8;
+        --muted: #c3b5a7;
+        --accent: #e38b62;
+        --accent-strong: #f0a27f;
+        --border: rgba(255, 237, 221, 0.12);
+        --shadow: rgba(0, 0, 0, 0.35);
+    }
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    min-height: 100vh;
+    font-family: Georgia, "Times New Roman", serif;
+    color: var(--text);
+    background:
+        radial-gradient(circle at top left, rgba(184, 92, 56, 0.18), transparent 32%),
+        radial-gradient(circle at bottom right, rgba(115, 84, 56, 0.12), transparent 28%),
+        linear-gradient(180deg, var(--bg), #efe7db);
+}
+
+.page-shell {
+    width: min(1080px, calc(100% - 32px));
+    margin: 0 auto;
+    padding: 40px 0 56px;
+}
+
+.landing,
+.app-page {
+    display: grid;
+    gap: 24px;
+}
+
+.hero-card,
+.download-card,
+.release-notes,
+.app-card,
+.nav-bar {
+    border: 1px solid var(--border);
+    background: var(--surface);
+    backdrop-filter: blur(18px);
+    box-shadow: 0 18px 40px var(--shadow);
+}
+
+.hero-card {
+    border-radius: 28px;
+    padding: 40px;
+}
+
+.brand-mark {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 82px;
+    height: 82px;
+    border-radius: 24px;
+    margin-bottom: 20px;
+    background: linear-gradient(135deg, var(--accent), #d79f52);
+    color: #fff8f1;
+    font-size: 1.45rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+}
+
+.eyebrow {
+    color: var(--accent-strong);
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+
+h1,
+h2,
+h3 {
+    font-weight: 600;
+    letter-spacing: -0.03em;
+}
+
+h1 {
+    max-width: 12ch;
+    font-size: clamp(2.8rem, 6vw, 4.8rem);
+    line-height: 0.95;
+}
+
+.intro,
+.tagline,
+.app-card p,
+.release-notes-body,
+.download-meta,
+.footer-note,
+.empty-state,
+.loading,
+.nav-link {
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", sans-serif;
+}
+
+.intro {
+    max-width: 62ch;
+    margin-top: 20px;
+    color: var(--muted);
+    font-size: 1.05rem;
+    line-height: 1.7;
+}
+
+.app-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px;
+}
+
+.app-card {
+    display: grid;
+    gap: 18px;
+    border-radius: 24px;
+    padding: 28px;
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.app-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(184, 92, 56, 0.4);
+}
+
+.app-card-head,
+.nav-bar,
+.download-meta,
+.page-header,
+.version-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.app-card-icon {
+    width: 54px;
+    height: 54px;
+    border-radius: 16px;
+    flex: 0 0 auto;
+    box-shadow: 0 10px 24px var(--shadow);
+}
+
+.app-badge,
+.app-platform,
+.feature-badge {
+    display: inline-flex;
+    align-items: center;
+    border-radius: 999px;
+    padding: 7px 12px;
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", sans-serif;
+    font-size: 0.8rem;
+}
+
+.app-badge {
+    background: rgba(184, 92, 56, 0.12);
+    color: var(--accent-strong);
+}
+
+.app-platform,
+.feature-badge {
+    border: 1px solid var(--border);
+    color: var(--muted);
+}
+
+.app-card h2,
+.download-card h2 {
+    font-size: 1.6rem;
+}
+
+.app-card p,
+.tagline,
+.footer-note {
+    color: var(--muted);
+    line-height: 1.65;
+}
+
+.app-link,
+.nav-link {
+    color: var(--accent-strong);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.app-page {
+    max-width: 760px;
+    margin: 0 auto;
+}
+
+.nav-bar {
+    border-radius: 20px;
+    padding: 14px 18px;
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", sans-serif;
+}
+
+.page-header {
+    align-items: flex-start;
+}
+
+.header-copy {
+    display: grid;
+    gap: 14px;
+}
+
+.tagline {
+    max-width: 56ch;
+    font-size: 1.02rem;
+}
+
+.features {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.download-card,
+.release-notes {
+    border-radius: 24px;
+    padding: 28px;
+}
+
+.version-row {
+    margin-bottom: 16px;
+}
+
+.version-row label {
+    min-width: 64px;
+    color: var(--muted);
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", sans-serif;
+    font-size: 0.92rem;
+}
+
+select {
+    width: 100%;
+    flex: 1;
+    appearance: none;
+    -webkit-appearance: none;
+    padding: 11px 42px 11px 14px;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    background-color: var(--surface-strong);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", sans-serif;
+    font-size: 0.95rem;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%236a625c' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+}
+
+.download-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    gap: 8px;
+    padding: 14px 20px;
+    border-radius: 14px;
+    background: linear-gradient(135deg, var(--accent), #d2875f);
+    color: #fff9f3;
+    text-decoration: none;
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", sans-serif;
+    font-weight: 600;
+}
+
+.download-btn:focus-visible,
+.nav-link:focus-visible,
+.app-card:focus-visible {
+    outline: 2px solid var(--accent-strong);
+    outline-offset: 2px;
+}
+
+.download-meta {
+    margin-top: 12px;
+    color: var(--muted);
+    font-size: 0.84rem;
+}
+
+.secondary-link {
+    display: inline-block;
+    margin-top: 16px;
+    color: var(--accent-strong);
+    text-decoration: none;
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", sans-serif;
+    font-size: 0.9rem;
+}
+
+.release-notes h3 {
+    font-size: 1.1rem;
+    margin-bottom: 14px;
+}
+
+.release-notes-body {
+    color: var(--muted);
+    line-height: 1.7;
+    white-space: pre-wrap;
+}
+
+.loading,
+.empty-state {
+    padding: 18px 0;
+    color: var(--muted);
+}
+
+.footer-note {
+    text-align: center;
+    font-size: 0.84rem;
+}
+
+@media (max-width: 760px) {
+    .page-shell {
+        width: min(100% - 24px, 1080px);
+        padding: 24px 0 40px;
+    }
+
+    .hero-card,
+    .download-card,
+    .release-notes,
+    .app-card {
+        padding: 22px;
+    }
+
+    .app-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .version-row,
+    .download-meta,
+    .page-header,
+    .nav-bar {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .page-header {
+        gap: 16px;
+    }
+
+    h1 {
+        max-width: none;
+    }
+}

@@ -3,369 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simply Text — Clean Clipboard for macOS</title>
-    <style>
-        :root {
-            --bg: #ffffff;
-            --bg-secondary: #f5f5f7;
-            --text: #1d1d1f;
-            --text-secondary: #6e6e73;
-            --accent: #0071e3;
-            --accent-hover: #0077ed;
-            --border: #d2d2d7;
-            --card-bg: #ffffff;
-            --shadow: rgba(0, 0, 0, 0.04);
-        }
-
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --bg: #1d1d1f;
-                --bg-secondary: #2d2d2f;
-                --text: #f5f5f7;
-                --text-secondary: #a1a1a6;
-                --accent: #2997ff;
-                --accent-hover: #4faaff;
-                --border: #424245;
-                --card-bg: #2d2d2f;
-                --shadow: rgba(0, 0, 0, 0.2);
-            }
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", sans-serif;
-            background: var(--bg);
-            color: var(--text);
-            line-height: 1.5;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 60px 24px;
-        }
-
-        .container {
-            max-width: 640px;
-            width: 100%;
-        }
-
-        header {
-            text-align: center;
-            margin-bottom: 48px;
-        }
-
-        .app-icon {
-            width: 96px;
-            height: 96px;
-            margin-bottom: 20px;
-            border-radius: 18px;
-        }
-
-        h1 {
-            font-size: 2rem;
-            font-weight: 700;
-            letter-spacing: -0.02em;
-            margin-bottom: 12px;
-        }
-
-        .tagline {
-            font-size: 1.1rem;
-            color: var(--text-secondary);
-            max-width: 420px;
-            margin: 0 auto;
-        }
-
-        .features {
-            display: flex;
-            gap: 16px;
-            justify-content: center;
-            margin-top: 24px;
-            flex-wrap: wrap;
-        }
-
-        .feature-badge {
-            background: var(--bg-secondary);
-            border: 1px solid var(--border);
-            border-radius: 20px;
-            padding: 6px 14px;
-            font-size: 0.85rem;
-            color: var(--text-secondary);
-        }
-
-        .download-card {
-            background: var(--card-bg);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 32px;
-            box-shadow: 0 2px 12px var(--shadow);
-            margin-bottom: 32px;
-        }
-
-        .download-card h2 {
-            font-size: 1.2rem;
-            font-weight: 600;
-            margin-bottom: 20px;
-        }
-
-        .version-row {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 16px;
-        }
-
-        .version-row label {
-            font-size: 0.9rem;
-            color: var(--text-secondary);
-            min-width: 60px;
-        }
-
-        select {
-            flex: 1;
-            padding: 8px 12px;
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            background: var(--bg-secondary);
-            color: var(--text);
-            font-size: 0.9rem;
-            appearance: none;
-            -webkit-appearance: none;
-            cursor: pointer;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%236e6e73' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10z'/%3E%3C/svg%3E");
-            background-repeat: no-repeat;
-            background-position: right 12px center;
-            padding-right: 32px;
-        }
-
-        .download-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            width: 100%;
-            justify-content: center;
-            padding: 14px 24px;
-            background: var(--accent);
-            color: #fff;
-            border: none;
-            border-radius: 10px;
-            font-size: 1rem;
-            font-weight: 500;
-            cursor: pointer;
-            text-decoration: none;
-            transition: background 0.2s;
-        }
-
-        .download-btn:hover {
-            background: var(--accent-hover);
-        }
-
-        .download-btn:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-        }
-
-        .download-meta {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 12px;
-            font-size: 0.8rem;
-            color: var(--text-secondary);
-        }
-
-        .release-notes {
-            background: var(--card-bg);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 32px;
-            box-shadow: 0 2px 12px var(--shadow);
-            margin-bottom: 32px;
-        }
-
-        .release-notes h3 {
-            font-size: 1rem;
-            font-weight: 600;
-            margin-bottom: 12px;
-        }
-
-        .release-notes-body {
-            font-size: 0.9rem;
-            color: var(--text-secondary);
-            white-space: pre-wrap;
-            line-height: 1.6;
-        }
-
-        .empty-state {
-            text-align: center;
-            padding: 40px 20px;
-            color: var(--text-secondary);
-            font-size: 0.95rem;
-        }
-
-        footer {
-            margin-top: 48px;
-            text-align: center;
-            font-size: 0.8rem;
-            color: var(--text-secondary);
-        }
-
-        footer a {
-            color: var(--accent);
-            text-decoration: none;
-        }
-
-        .loading {
-            text-align: center;
-            padding: 20px;
-            color: var(--text-secondary);
-        }
-    </style>
+    <title>Marbas &amp; Co</title>
+    <link rel="stylesheet" href="src/site.css">
 </head>
 <body>
-    <div class="container">
-        <header>
-            <img src="src/app-logo.svg" alt="Simply Text app icon" class="app-icon">
-            <h1>Simply Text</h1>
-            <p class="tagline">A native macOS menu bar app that removes formatting from your clipboard. Paste clean, plain text every time.</p>
-            <div class="features">
-                <span class="feature-badge">macOS native</span>
-                <span class="feature-badge">Menu bar app</span>
-                <span class="feature-badge">Privacy-first</span>
-                <span class="feature-badge">Free</span>
-            </div>
-        </header>
+    <div class="page-shell">
+        <main class="landing">
+            <section class="hero-card">
+                <div class="brand-mark" aria-hidden="true">M&amp;C</div>
+                <p class="eyebrow">Marbas &amp; Co</p>
+                <h1>Apps for macOS that make daily life easier.</h1>
+                <p class="intro">We build focused Mac apps with a simple goal: remove friction from everyday work. Every app here is free to download under the XXX license. Final licensing details will be decided later.</p>
+            </section>
 
-        <div class="download-card">
-            <h2>Download</h2>
-            <div id="download-content">
-                <div class="loading">Loading releases...</div>
-            </div>
-        </div>
-
-        <div class="release-notes" id="release-notes" style="display: none;">
-            <h3>Release Notes</h3>
-            <div class="release-notes-body" id="release-notes-body"></div>
-        </div>
-
-        <footer>
-            <p>Simply Text is free and open source. No clipboard data is collected or transmitted.</p>
-        </footer>
-    </div>
-
-    <script>
-        const REPO = "maber233/marbas-dist";
-        const API_URL = `https://api.github.com/repos/${REPO}/releases`;
-
-        const FALLBACK_RELEASES = [
-            {
-                tag_name: "v1.0",
-                published_at: "2026-06-11T19:17:26Z",
-                body: "## Simply Text v1.0\n\nA lightweight macOS menu bar utility that strips formatting from clipboard text.\n\n### Features\n- **Automatic mode** – continuously monitors the clipboard and strips formatting instantly\n- **Shortcut mode** – cleans clipboard text only when triggered via a configurable global hotkey\n- Menu bar icon with quick access to settings\n- About window with app info and version display\n- Custom app icon\n- Minimal footprint – runs as a background agent (no Dock icon)\n\n### Requirements\n- macOS 13.0 or later",
-                assets: [{
-                    name: "Simply Text.app.zip",
-                    browser_download_url: "downloads/simply-text/v1.0/Simply%20Text.app.zip",
-                    download_count: 0
-                }]
-            }
-        ];
-
-        let releases = [];
-
-        async function fetchReleases() {
-            try {
-                const response = await fetch(API_URL);
-                if (!response.ok) throw new Error("Failed to fetch");
-                const data = await response.json();
-                if (data.length) {
-                    releases = data;
-                } else {
-                    releases = FALLBACK_RELEASES;
-                }
-            } catch (e) {
-                releases = FALLBACK_RELEASES;
-            }
-            render();
-        }
-
-        function render() {
-            const container = document.getElementById("download-content");
-
-            if (!releases.length) {
-                renderEmpty();
-                return;
-            }
-
-            const options = releases.map((r, i) =>
-                `<option value="${i}">${r.tag_name}${i === 0 ? " (latest)" : ""}</option>`
-            ).join("");
-
-            container.innerHTML = `
-                <div class="version-row">
-                    <label for="version-select">Version</label>
-                    <select id="version-select" onchange="onVersionChange()">
-                        ${options}
-                    </select>
-                </div>
-                <a class="download-btn" id="download-btn" href="#">
-                    <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M8 12l-4-4h2.5V3h3v5H12L8 12z"/><path d="M3 14h10v-1H3v1z"/></svg>
-                    Download for macOS
+            <section class="app-grid" aria-label="Available applications">
+                <a class="app-card" href="simply-text/">
+                    <div class="app-card-head">
+                        <img class="app-card-icon" src="src/app-logo.svg" alt="Simply Text logo">
+                        <span class="app-platform">macOS</span>
+                    </div>
+                    <h2>Simply Text</h2>
+                    <p>Clean clipboard text for plain-text pasting without leftover formatting.</p>
+                    <span class="app-link">Open download page</span>
                 </a>
-                <div class="download-meta">
-                    <span id="download-count"></span>
-                    <span id="release-date"></span>
-                </div>
-            `;
 
-            onVersionChange();
-        }
-
-        function renderEmpty() {
-            const container = document.getElementById("download-content");
-            container.innerHTML = `
-                <div class="empty-state">
-                    <p>No releases available yet.</p>
-                    <p style="margin-top: 8px;">Check back soon for the first release.</p>
-                </div>
-            `;
-        }
-
-        function onVersionChange() {
-            const select = document.getElementById("version-select");
-            const release = releases[select.value];
-            const btn = document.getElementById("download-btn");
-            const countEl = document.getElementById("download-count");
-            const dateEl = document.getElementById("release-date");
-            const notesSection = document.getElementById("release-notes");
-            const notesBody = document.getElementById("release-notes-body");
-
-            const asset = release.assets.find(a => a.name.endsWith(".zip") || a.name.endsWith(".dmg"));
-
-            if (asset) {
-                btn.href = asset.browser_download_url;
-                btn.removeAttribute("disabled");
-                const totalDownloads = release.assets.reduce((sum, a) => sum + a.download_count, 0);
-                countEl.textContent = `${totalDownloads.toLocaleString()} download${totalDownloads !== 1 ? "s" : ""}`;
-            } else {
-                btn.href = release.zipball_url;
-                countEl.textContent = "";
-            }
-
-            const date = new Date(release.published_at);
-            dateEl.textContent = date.toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" });
-
-            if (release.body && release.body.trim()) {
-                notesSection.style.display = "block";
-                notesBody.textContent = release.body;
-            } else {
-                notesSection.style.display = "none";
-            }
-        }
-
-        fetchReleases();
-    </script>
+                <a class="app-card" href="recall/">
+                    <div class="app-card-head">
+                        <img class="app-card-icon" src="src/recall-temp-icon.svg" alt="Temporary Recall logo">
+                        <span class="app-platform">macOS</span>
+                    </div>
+                    <h2>Recall</h2>
+                    <p>A lightweight Mac app from Marbas &amp; Co, available with its own release notes and downloads.</p>
+                    <span class="app-link">Open download page</span>
+                </a>
+            </section>
+        </main>
+    </div>
 </body>
 </html>
