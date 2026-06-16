@@ -14,8 +14,19 @@
                 throw new Error("Failed to fetch releases");
             }
 
-            const data = await response.json();
-            releases = Array.isArray(data) ? data : [];
+            let data = await response.json();
+            data = Array.isArray(data) ? data : [];
+
+            // Filter by tag prefix if configured (e.g. "recall-" keeps only recall-v1.0, recall-v1.1, etc.)
+            if (config.tagPrefix) {
+                data = data.filter((r) => r.tag_name && r.tag_name.startsWith(config.tagPrefix));
+                data = data.map((r) => ({
+                    ...r,
+                    tag_name: r.tag_name.slice(config.tagPrefix.length)
+                }));
+            }
+
+            releases = data;
         } catch (error) {
             releases = [];
         }
