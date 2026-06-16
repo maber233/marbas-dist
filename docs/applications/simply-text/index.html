@@ -4,18 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Simply Text — Clean Clipboard for macOS</title>
-    <link rel="stylesheet" href="../src/download-page.css">
+    <link rel="stylesheet" href="../../src/download-page.css">
 </head>
 <body>
     <div class="container">
         <nav class="page-nav" aria-label="Breadcrumb">
-            <a href="../">Back to all apps</a>
+            <a href="../../">Back to all apps</a>
         </nav>
 
         <header>
-            <img src="../src/app-logo.svg" alt="Simply Text app icon" class="app-icon">
+            <img src="../../src/simply_text.svg" alt="Simply Text app icon" class="app-icon">
             <h1>Simply Text</h1>
-            <p class="tagline">A native macOS menu bar app that removes formatting from your clipboard. Paste clean, plain text every time.</p>
+            <p class="tagline">Simply Text is a lightweight macOS menu bar utility that strips formatting from copied text. No more fighting with unwanted fonts, colors, or styles when pasting into emails, documents, or chat.</p>
+            <p class="tagline">Copy text from anywhere — browsers, PDFs, design tools, email — and Simply Text removes all formatting, leaving you with clean plain text ready to paste.</p>
             <div class="features">
                 <span class="feature-badge">macOS native</span>
                 <span class="feature-badge">Menu bar app</span>
@@ -29,6 +30,7 @@
             <div id="download-content">
                 <div class="loading">Loading releases...</div>
             </div>
+            <p style="margin-top: 16px; font-size: 0.85rem; color: var(--text-secondary);">By downloading this application you agree to the <a href="../../eula.html" style="color: var(--accent);">EULA</a>.</p>
         </div>
 
         <div class="release-notes" id="release-notes" style="display: none;">
@@ -37,15 +39,15 @@
         </div>
 
         <footer>
-            <p>Simply Text is free to download from Marbas &amp; Co. Final license details are still to be decided.</p>
+            <p>Simply Text is free to download from Marbas &amp; Co. By downloading this application you agree to the <a href="../../eula.html" style="color: var(--accent);">EULA</a>.</p>
         </footer>
     </div>
 
     <script>
         window.DOWNLOAD_PAGE_CONFIG = {
-            releasesUrl: "../downloads/simply-text/releases.json"
+            releasesUrl: "../../downloads/simply-text/releases.json"
         };
     </script>
-    <script src="../src/download-page.js"></script>
+    <script src="../../src/download-page.js"></script>
 </body>
 </html>

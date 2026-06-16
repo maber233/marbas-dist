@@ -3,11 +3,11 @@
     "tag_name": "v1.0",
     "published_at": "2026-06-15T07:29:21Z",
     "body": "",
-    "body_url": "../downloads/recall/v1.0/v1.0.md",
+    "body_url": "../../downloads/recall/v1.0/v1.0.md",
     "assets": [
       {
         "name": "Recall-1.0.zip",
-        "browser_download_url": "../downloads/recall/v1.0/Recall-1.0.zip",
+        "browser_download_url": "../../downloads/recall/v1.0/Recall-1.0.zip",
         "download_count": 0
       }
     ]

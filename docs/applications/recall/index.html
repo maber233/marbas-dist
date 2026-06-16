@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recall — Native macOS app</title>
+    <link rel="stylesheet" href="../../src/download-page.css">
+</head>
+<body>
+    <div class="container">
+        <nav class="page-nav" aria-label="Breadcrumb">
+            <a href="../../">Back to all apps</a>
+        </nav>
+
+        <header>
+            <img src="../../src/recall-temp-icon.svg" alt="Recall app icon" class="app-icon">
+            <h1>Recall</h1>
+            <p class="tagline">Recall is a lightweight macOS menu bar app that captures, transcribes, and summarizes your meetings — so you can focus on the conversation, not on taking notes.</p>
+            <p class="tagline">Start a recording, stop when you're done, and get a polished AI-generated summary copied to your clipboard. Paste it into Obsidian, Notion, or wherever you keep your notes.</p>
+            <div class="features">
+                <span class="feature-badge">macOS native</span>
+                <span class="feature-badge">Menu bar app</span>
+                <span class="feature-badge">AI-powered</span>
+                <span class="feature-badge">Infographic</span>
+                <span class="feature-badge">Free</span>
+            </div>
+        </header>
+
+        <div class="download-card">
+            <h2>Download</h2>
+            <div id="download-content">
+                <div class="loading">Loading releases...</div>
+            </div>
+            <p style="margin-top: 16px; font-size: 0.85rem; color: var(--text-secondary);">By downloading this application you agree to the <a href="../../eula.html" style="color: var(--accent);">EULA</a>.</p>
+        </div>
+
+        <div class="release-notes" id="release-notes" style="display: none;">
+            <h3>Release Notes</h3>
+            <div class="release-notes-body" id="release-notes-body"></div>
+        </div>
+
+        <footer>
+            <p>Recall is free to download from Marbas &amp; Co. By downloading this application you agree to the <a href="../../eula.html" style="color: var(--accent);">EULA</a>.</p>
+        </footer>
+    </div>
+
+    <script>
+        window.DOWNLOAD_PAGE_CONFIG = {
+            releasesUrl: "../../downloads/recall/releases.json"
+        };
+    </script>
+    <script src="../../src/download-page.js"></script>
+</body>
+</html>

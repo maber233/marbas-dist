@@ -66,6 +66,35 @@
         `;
     }
 
+    function renderMarkdown(md) {
+        let html = md
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;");
+
+        // Headers
+        html = html.replace(/^### (.+)$/gm, "<h5>$1</h5>");
+        html = html.replace(/^## (.+)$/gm, "<h4>$1</h4>");
+        html = html.replace(/^# (.+)$/gm, "<h3>$1</h3>");
+
+        // Bold
+        html = html.replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
+
+        // Convert list items
+        html = html.replace(/^- (.+)$/gm, "<li>$1</li>");
+
+        // Wrap consecutive <li> in <ul>
+        html = html.replace(/((?:<li>.*<\/li>\n?)+)/g, "<ul>$1</ul>");
+
+        // Paragraphs: wrap non-empty lines that aren't already wrapped in tags
+        html = html.replace(/^(?!<[hulo]|<li|$)(.+)$/gm, "<p>$1</p>");
+
+        // Remove empty lines
+        html = html.replace(/\n{2,}/g, "\n");
+
+        return html.trim();
+    }
+
     async function onVersionChange() {
         const select = document.getElementById("version-select");
         const release = releases[Number(select.value)];
@@ -79,23 +108,26 @@
             ? release.assets.find((item) => item.name.endsWith(".zip") || item.name.endsWith(".dmg"))
             : null;
 
+        const showStats = new URLSearchParams(window.location.search).has("showStats");
+
         if (asset) {
             button.href = asset.browser_download_url;
-            const totalDownloads = release.assets.reduce((sum, item) => sum + (item.download_count || 0), 0);
-            countEl.textContent = `${totalDownloads.toLocaleString()} download${totalDownloads !== 1 ? "s" : ""}`;
+            if (showStats) {
+                const totalDownloads = release.assets.reduce((sum, item) => sum + (item.download_count || 0), 0);
+                countEl.textContent = `${totalDownloads.toLocaleString()} download${totalDownloads !== 1 ? "s" : ""}`;
+            } else {
+                countEl.textContent = "";
+            }
         } else {
             button.href = release.zipball_url || "#";
             countEl.textContent = "";
         }
 
-        const date = new Date(release.published_at);
-        dateEl.textContent = Number.isNaN(date.getTime())
-            ? ""
-            : date.toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" });
+        dateEl.textContent = "";
 
         if (release.body && release.body.trim()) {
             notesSection.style.display = "block";
-            notesBody.textContent = release.body;
+            notesBody.innerHTML = renderMarkdown(release.body);
             return;
         }
 
@@ -109,10 +141,10 @@
                 const body = await response.text();
                 if (body.trim()) {
                     notesSection.style.display = "block";
-                    notesBody.textContent = body;
+                    notesBody.innerHTML = renderMarkdown(body);
                 } else {
                     notesSection.style.display = "none";
-                    notesBody.textContent = "";
+                    notesBody.innerHTML = "";
                 }
             } catch (error) {
                 notesSection.style.display = "none";
@@ -122,7 +154,7 @@
         }
 
         notesSection.style.display = "none";
-        notesBody.textContent = "";
+        notesBody.innerHTML = "";
     }
 
     void fetchReleases();
