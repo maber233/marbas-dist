@@ -1,0 +1,4 @@
+# Recall distribution checksums
+# Version 1.1 (Build 10)
+3b1c35672f479abc574915cbd247fb8bfa8baf5d676c203d5bcae72a3f8a466c  Recall-1.1.zip
+984111f6885ee739a8dc176be006166d21e5a02b2f70ba17ff06c25cbdabe2f3  Recall.app (bundle-content)

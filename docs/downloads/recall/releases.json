@@ -1,5 +1,18 @@
 [
   {
+    "tag_name": "v1.1",
+    "published_at": "2026-06-20T13:22:47Z",
+    "body": "",
+    "body_url": "../../downloads/recall/v1.1/v1.1.md",
+    "assets": [
+      {
+        "name": "Recall-1.1.zip",
+        "browser_download_url": "../../downloads/recall/v1.1/Recall-1.1.zip",
+        "download_count": 0
+      }
+    ]
+  },
+  {
     "tag_name": "v1.0",
     "published_at": "2026-06-15T07:29:21Z",
     "body": "",
