@@ -42,16 +42,11 @@
             return;
         }
 
-        const options = releases.map((release, index) =>
-            `<option value="${index}">${release.tag_name}${index === 0 ? " (latest)" : ""}</option>`
-        ).join("");
+        const release = releases[0];
 
         container.innerHTML = `
             <div class="version-row">
-                <label for="version-select">Version</label>
-                <select id="version-select">
-                    ${options}
-                </select>
+                <span class="version-label">${release.tag_name}</span>
             </div>
             <a class="download-btn" id="download-btn" href="#">
                 <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M8 12l-4-4h2.5V3h3v5H12L8 12z"></path><path d="M3 14h10v-1H3v1z"></path></svg>
@@ -63,8 +58,7 @@
             </div>
         `;
 
-        document.getElementById("version-select").addEventListener("change", onVersionChange);
-        void onVersionChange();
+        void showRelease(release);
     }
 
     function renderEmpty() {
@@ -106,9 +100,7 @@
         return html.trim();
     }
 
-    async function onVersionChange() {
-        const select = document.getElementById("version-select");
-        const release = releases[Number(select.value)];
+    async function showRelease(release) {
         const button = document.getElementById("download-btn");
         const countEl = document.getElementById("download-count");
         const dateEl = document.getElementById("release-date");
